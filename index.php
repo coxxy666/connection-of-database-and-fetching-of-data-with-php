@@ -1,5 +1,30 @@
 <?php
 
+$connection = mysqli_connect("localhost", "root","", "localuser(databasename)");
+if($connection) {
+    echo "successful"
+};
+
+    else{
+
+        die("Database failed");
+    }
+
+    $query = "INSERT INTO user(tablename)(username, password) ";
+    $query .= "VALUES ('$username', '$password' )";
+
+   $result = mysqli_query ($connection, $query);
+
+   if(!$result) {
+
+    die("query failed" . mysqli_error );
+
+   }
+  $query_select = "SELECT * FROM  users";
+    
+
+
+
 if (isset($_POST['sumbit'])){
 
 $username = $_POST['username'];
@@ -12,7 +37,7 @@ echo'Your password is'  .$password;
 
 if(strlen($username) < 5 ) {
 
- echo "Too Short";
+ echo  "Too Short";
 }
 
 
@@ -36,6 +61,18 @@ if(strlen($username) < 5 ) {
 
 <body>
 
+
+<?php
+
+while ($row = mysqli_fetch_row($result)) {
+
+    print_r($row);
+
+}
+
+
+
+?>
     <form action="" method="post">
 
         
